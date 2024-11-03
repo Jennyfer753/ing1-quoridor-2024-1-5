@@ -1,0 +1,17 @@
+#include <stdio.h>
+
+int AfficherAide() {
+    printf("Règle du jeu :");
+    printf("But du jeu : Être le premier à atteindre la ligne opposée à celle de départ.\n");
+    printf("Les joueurs disposent chacun de 10 barrières et d’un pion placé au milieu de sa ligne de départ.\n");
+    printf("A tour de rôle, chaque joueur a la possibilité de déplacer son pion d'une case verticalement ou horizontalement ou de placer une de ses barrières pour ralentir l’adversaire \n");
+    printf("A propos des barrières :\n");
+    printf("les barrières doivent être posées exactement entre 2 blocs de 2 cases. Elles ne peuvent pas se chevaucher \n");
+    printf("Les barrières ne peuvent pas être pose de sorte à bloquer complètement l’avancement de l’adversaire, il faut toujours lui laisser une solution.\n");
+    printf("Une fois posées, elles ne peuvent plus être retirées ni bougées de la partie \n");
+    printf("Lorsqu’un joueur n’a plus de barrières, il est obligé de déplacer son pion \n");
+    printf("En cas de face à face : \n");
+    printf("Si les 2 pions se retrouvent en face à face sur 2 cases voisines non séparées par une barrière, le joueur dont c’est le tour peut sauter son adversaire. \n");
+    printf(" Si une barrière est située derrière le pion sauté, alors le pion sauteur devra être posé sur n'importe quelle autre case adjacente au pion sauté");
+    return 0;
+}
