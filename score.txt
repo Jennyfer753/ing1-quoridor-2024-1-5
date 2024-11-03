@@ -1,0 +1,9 @@
+#include <stdio.h>
+
+int main(void)
+{
+   int score1,score2,score3,score4;;
+    printf("le score est de",score1,score2,score3,score4);
+    scanf("%d%d%d%d",&score1,&score2,&score3,&score4);
+    return 0;
+}
