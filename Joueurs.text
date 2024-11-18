@@ -1,0 +1,29 @@
+
+
+int ChoixJoueurs()
+{
+    int nbrjoueur;
+    char joueur1[50],joueur2[50],joueur3[50],joueur4[50];
+    printf("Combien de joueurs pour cette partie?\n",nbrjoueur);
+    scanf("%d",&nbrjoueur);
+
+    if (nbrjoueur==2) {
+        printf("Entrer le nom du Joueur 1: ");
+        scanf("%s",&joueur1);
+        printf("Entrer le nom du Joueur 2: ");
+        scanf("%s",&joueur2);
+        printf("Les noms des deux joueurs sont: %s %s ", joueur1, joueur2);
+    }
+    if (nbrjoueur==4) {
+        printf("Entrer le nom du Joueur 1: ");
+        scanf("%s",&joueur1);
+        printf("Entrer le nom du Joueur 2: ");
+        scanf("%s",&joueur2);
+        printf("Entrer le nom du Joueur 3: ");
+        scanf("%s",&joueur3);
+        printf("Entrer le nom du Joueur 4: ");
+        scanf("%s",&joueur4);
+        printf("Les noms des quatres joueurs sont:%s %s %s %s " ,joueur1,joueur2,joueur3,joueur4);
+}
+    return 0;
+}
