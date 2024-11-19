@@ -1,0 +1,62 @@
+#include <stdio.h>
+
+void initialisationPlateau(char plateau[17][17], int taille){
+    for (int i=0; i<taille; i++){
+        for (int j=0; j<taille; j++){
+            if (i%2==0 && j%2==0){
+                plateau[i][j] ='.';
+            }else if (i%2==0 && j%2!=0) {
+                plateau[i][j] ='|';
+            }else if (i%2!=0 && j%2== 0) {
+                plateau[i][j] ='-';
+            }else {
+                plateau[i][j] =' ';
+            }
+        }
+    }
+}
+
+
+void annotationsColonnes(int taille){
+    printf("    ");
+    for (int j = 0; j<taille; j++){
+        if (j%2==0) {
+            printf("%d ",(j / 2)+1);
+        } else {
+            printf("  ");
+        }
+    }
+    printf("\n");
+}
+
+
+void annotationLigne(char plateau[17][17], int i, int taille) {
+    if (i%2==0) {
+        printf(" %c  ", 'A' + i / 2);
+    } else {
+        printf("    ");
+    }
+    for (int j=0; j<taille; j++) {
+        printf("%c ", plateau[i][j]);
+    }
+    printf("\n");
+}
+
+
+void affichagePlateau(char plateau[][17], int taille) {
+    annotationsColonnes(taille);
+    for (int i=0; i<taille; i++) {
+        annotationLigne(plateau,i,taille);
+    }
+}
+
+
+int main() {
+    int taille=17 ;
+    char plateau[taille][taille];
+    initialisationPlateau(plateau,taille);
+    affichagePlateau(plateau, taille);
+
+    return 0;
+}
+
