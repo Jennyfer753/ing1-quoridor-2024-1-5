@@ -1,3 +1,6 @@
+
+#include "joueurs.h"// Inclusion du fichier header "joueurs.h"
+
 int ChoixJoueurs(nbrjoueur, joueur1, joueur2, joueur3, joueur4, )
 
     if (nbrjoueur == 2) {// Vérifie si le nombre de joueurs est égal à 2.
