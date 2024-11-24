@@ -1,0 +1,50 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+
+void afficherScorePartiePrecedente(const char *nomFichier) {
+    FILE *fichier = fopen(nomFichier, "r");
+    int joueurmax=4
+    int scores[joueurmax];
+    int nombreJoueurs;
+    char gagnant[100];
+
+    if (fichier != NULL) {
+        // Lire le nombre de joueurs
+        fscanf(fichier, "%d", &nombreJoueurs);
+
+        if (nombreJoueurs < 1 || nombreJoueurs > joueurmax) {
+            printf("Erreur : Nombre de joueurs invalide dans le fichier.\n");
+            fclose(fichier);
+            return;
+        }
+
+        // Lire les scores des joueurs
+        for (int i = 0; i < nombreJoueurs; i++) {
+            fscanf(fichier, "%d", &scores[i]);
+        }
+
+        // Lire le gagnant
+        fscanf(fichier, "%s", gagnant);
+
+        // Fermer le fichier
+        fclose(fichier);
+
+        // Afficher les scores de la partie précédente
+        printf("=== Score de la Partie Précédente ===\n");
+        for (int i = 0; i < nombreJoueurs; i++) {
+            printf("Joueur %d : %d points\n", i + 1, scores[i]);
+        }
+        printf("Gagnant de la dernière partie : %s\n", gagnant);
+        printf("=====================================\n");
+
+    } else {
+        printf("Aucun score de partie précédente trouvé.\n");
+    }
+}
+
+int main() {
+    const char *nomFichier = "score_precedent.txt";
+    afficherScorePartiePrecedente(nomFichier);
+    return 0;
+}
