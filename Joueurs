@@ -1,0 +1,28 @@
+int ChoixJoueurs(nbrjoueur, joueur1, joueur2, joueur3, joueur4, )
+
+    if (nbrjoueur == 2) {// Vérifie si le nombre de joueurs est égal à 2.
+        printf("Entrer le nom du Joueur 1: ");// Demande à l'utilisateur de saisir le nom du joueur 1
+        scanf("%s", &joueur1);//stocke la chaîne de caractères dans `joueur1`.
+        printf("Entrer le nom du Joueur 2: ");// Demande à l'utilisateur de saisir le nom du joueur 2
+        scanf("%s", &joueur2); //stocke la chaîne de caractères dans `joueur2`
+        printf("Les noms des deux joueurs sont: %s %s ", joueur1, joueur2);   // Affiche les noms des deux joueurs saisis.
+
+    }
+    if (nbrjoueur == 4) {// Vérifie si le nombre de joueurs est égal à 4.
+
+
+        printf("Entrer le nom du Joueur 1: "); // Demande à l'utilisateur de saisir le nom du joueur 1.
+        scanf("%s", &joueur1);//stocke la chaîne de caractères dans `joueur1`.
+        printf("Entrer le nom du Joueur 2: "); // Demande à l'utilisateur de saisir le nom du joueur 2.
+        scanf("%s", &joueur2);//stocke la chaîne de caractères dans `joueur2`.
+        printf("Entrer le nom du Joueur 3: ");   // Demande à l'utilisateur de saisir le nom du joueur 3.
+        scanf("%s", &joueur3);//stocke la chaîne de caractères dans `joueur3`.
+        printf("Entrer le nom du Joueur 4: ");// Demande à l'utilisateur de saisir le nom du joueur 4.
+        scanf("%s", &joueur4);//stocke la chaîne de caractères dans `joueur4`.
+        printf("Les noms des quatres joueurs sont: %s %s %s %s ", joueur1, joueur2, joueur3, joueur4);   // Affiche les noms des quatre joueurs saisis.
+
+    }
+
+    return 0; // Retourne 0 : la fonction s'est exécutée correctement.
+   
+}
