@@ -1,0 +1,172 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <windows.h>
+
+typedef struct {
+    char nom[20];
+    int jeton_x, jeton_y;
+    int murs_restants;
+    int score;
+} Joueur;
+
+void gotoligcol(int ligne, int colonne) {
+    COORD coord;
+    coord.X = colonne;
+    coord.Y = ligne;
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+}
+
+void initialisationPlateau(char plateau[17][17], int taille) {
+    for (int i = 0; i < taille; i++) {
+        for (int j = 0; j < taille; j++) {
+            if (i % 2 == 0 && j % 2 == 0) {
+                plateau[i][j] = ' ';
+            } else if (i % 2 == 0) {
+                plateau[i][j] = '|';
+            } else if (j % 2 == 0) {
+                plateau[i][j] = '-';
+            } else {
+                plateau[i][j] = ' ';
+            }
+        }
+    }
+}
+
+void annotationsColonnes(int taille) {
+    printf("    ");
+    for (int j = 0; j < taille; j++) {
+        if (j % 2 == 0) {
+            printf("%d ", (j / 2) + 1);
+        } else {
+            printf("  ");
+        }
+    }
+    printf("\n");
+}
+
+void annotationLigne(char plateau[17][17], int i, int taille, Joueur joueurs[], int nbjoueurs) {
+    if (i % 2 == 0) {
+        printf(" %c  ", 'A' + i / 2);
+    } else {
+        printf("    ");
+    }
+
+    for (int j = 0; j < taille; j++) {
+        char contenu = plateau[i][j];
+        for (int a = 0; a < nbjoueurs; a++) {
+            if (joueurs[a].jeton_x == i && joueurs[a].jeton_y == j) {
+                contenu = '1' + a;
+            }
+        }
+        printf("%c ", contenu);
+    }
+    printf("\n");
+}
+
+void affichageInformations(Joueur joueurs[], int nbjoueurs, int start_lig, int start_col) {
+    gotoligcol(start_lig, start_col);
+    printf("INFORMATIONS :");
+    for (int i = 0; i < nbjoueurs; i++) {
+        // Affiche le nom du joueur
+        gotoligcol(start_lig + (i * 4) + 1, start_col);
+        printf("Nom : %s", joueurs[i].nom);
+
+        // Affiche la position du jeton
+        gotoligcol(start_lig + (i * 4) + 2, start_col);
+        printf("Position : (%d, %d)", joueurs[i].jeton_x / 2, joueurs[i].jeton_y / 2);
+
+        // Affiche le nombre de murs restants et le score
+        gotoligcol(start_lig + (i * 4) + 3, start_col);
+        printf("Murs : %d  |  Score : %d", joueurs[i].murs_restants, joueurs[i].score);
+    }
+}
+
+
+
+void actionMenu(int start_lig) {
+    gotoligcol(start_lig, 60);
+    printf("ACTIONS POSSIBLES :");
+    gotoligcol(start_lig + 1, 60);
+    printf("1. Deplacer son jeton");
+    gotoligcol(start_lig + 2, 60);
+    printf("2. Poser une barriere");
+    gotoligcol(start_lig + 3, 60);
+    printf("3. Passer son tour");
+    gotoligcol(start_lig + 4, 60);
+    printf("4. Annuler le dernier mouvement");
+    gotoligcol(start_lig + 5, 60);
+    printf("5. Quitter et sauvegarder");
+    gotoligcol(start_lig + 6, 60);
+    printf("6. Quitter sans sauvegarder");
+    gotoligcol(start_lig + 7, 60);
+    printf("7. Aide du jeu");
+}
+
+    affichageInformations(joueurs, nbjoueurs, 0, info_start_col);
+
+  
+    actionMenu(actions_start_lig);
+}
+
+
+int main() {
+    int nbjoueurs;
+    printf("Entrez le nombre de joueurs (2-4) : ");
+    scanf("%d", &nbjoueurs);
+
+    if (nbjoueurs < 2 || nbjoueurs > 4) {
+        printf("Nombre de joueurs invalide !\n");
+        return 1;
+    }
+
+    Joueur joueurs[4];
+    char plateau[17][17];
+    initialisationPlateau(plateau, 17);
+
+    // Initialisation des joueurs
+    for (int i = 0; i < nbjoueurs; i++) {
+        sprintf(joueurs[i].nom, "Joueur %d", i + 1);
+        joueurs[i].jeton_x = (i % 2 == 0) ? 0 : 16;
+        joueurs[i].jeton_y = 8;
+        joueurs[i].murs_restants = 10;
+        joueurs[i].score = 0;
+    }
+
+    int choix;
+    do {
+        system("cls");
+        affichagePlateau(plateau, 17, joueurs, nbjoueurs);
+
+        gotoligcol(20, 0);
+        printf("Votre choix : ");
+        scanf("%d", &choix);
+
+        switch (choix) {
+            case 1:
+                printf("Deplacer son jeton\n");
+                break;
+            case 2:
+                printf("Poser une barriere\n");
+                break;
+            case 3:
+                printf("Passer son tour\n");
+                break;
+            case 4:
+                printf("Annuler le dernier mouvement\n");
+                break;
+            case 5:
+                printf("Quitter et sauvegarder.\n");
+                break;
+            case 6:
+                printf("Quitter sans sauvegarder\n");
+                break;
+            case 7:
+                printf("Aide du jeu\n");
+                break;
+            default:
+                printf("Choix invalide !\n");
+        }
+    } while (choix != 5 && choix != 6);
+
+    return 0;
+}
