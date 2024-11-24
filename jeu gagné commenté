@@ -1,0 +1,6 @@
+
+#include "JeuGagné.h"// Inclusion du fichier header "JeuGagné.h".
+
+void JeuGagné(){// Cette fonction est utilisée pour vérifier que la condition de victoire dans le jeu est atteinte.
+
+}
