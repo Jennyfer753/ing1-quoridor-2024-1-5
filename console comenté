@@ -1,0 +1,132 @@
+#include "Console.h"
+#include "Plateau.h"
+#include "Joueur.h"
+
+
+typedef struct {
+    char nom[20];
+    int jeton_x, jeton_y;
+    int murs_restants;
+    int score;
+} Joueur;
+
+/
+void gotoligcol(int ligne, int colonne) {
+    COORD coord;
+    coord.X = colonne;
+    coord.Y = ligne;
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+}
+// Fonction pour déplacer le curseur à une position spécifique .
+
+void affichageInformations(Joueur joueurs[], int nbjoueurs) {// Affiche les informations des joueurs, ligne par ligne, en commençant en haut à gauche de la console.
+    int start_lig = 0;
+    int start_col = 0;
+    gotoligcol(start_lig, start_col);
+    printf("INFORMATIONS :");
+
+
+    for (int i = 0; i < nbjoueurs; i++) {
+        gotoligcol(start_lig, start_col);
+        printf("Nom : %s", joueurs[i].nom);
+// Affiche le nom du joueur.
+
+        gotoligcol(start_lig + 1, start_col);
+        printf("Position : (%d, %d)", joueurs[i].jeton_x / 2, joueurs[i].jeton_y / 2);
+// Affiche la position du jeton du joueur, divisée par 2 pour un affichage plus clair.
+
+        gotoligcol(start_lig + 2, start_col);
+        printf("Murs : %d  |  Score : %d", joueurs[i].murs_restants, joueurs[i].score);
+// Affiche le nombre de murs restants et le score du joueur.
+    }
+}
+
+void actionMenu() {
+    int start_lig = 0;
+    gotoligcol(start_lig + 10, 60);
+    printf("ACTIONS POSSIBLES :");
+
+
+    gotoligcol(start_lig + 11, 60);
+    printf("1. Deplacer son jeton");
+
+    gotoligcol(start_lig + 12, 60);
+    printf("2. Poser une barriere");
+
+
+    gotoligcol(start_lig + 13, 60);
+    printf("3. Passer son tour");
+    gotoligcol(start_lig + 14, 60);
+    printf("4. Annuler le dernier mouvement");
+
+
+    gotoligcol(start_lig + 15, 60);
+    printf("5. Quitter et sauvegarder");
+
+
+    gotoligcol(start_lig + 16, 60);
+    printf("6. Quitter sans sauvegarder")
+
+    gotoligcol(start_lig + 17, 60);
+    printf("7. Aide du jeu");
+
+}
+
+void console() {
+    joueur();// Appelle ula fonction `joueur` pour gérer les joueurs ou initialiser leurs données.
+
+    Joueur joueurs[4];
+    char plateau[17][17];
+    initialisationPlateau(plateau, 17);// Appelle la fonction d'initialisation duplateau de jeu
+
+    for (int i = 0; i < nbjoueurs; i++) {// Configure les données initiale des joueurs : nom, position du jeton, murs restants, et score.
+        sprintf(joueurs[i].nom, "Joueur %d", i + 1);
+        joueurs[i].jeton_x = (i % 2 == 0) ? 0 : 16;
+        joueurs[i].jeton_y = 8;
+        joueurs[i].murs_restants = 10;
+        joueurs[i].score = 0;
+
+    }
+
+    int choix;
+    do {
+        system("cls");// Efface l'écran pour actualiser l'affichage
+
+        affichagePlateau(plateau, 17, joueurs, nbjoueurs);// Affiche le plateau
+
+
+        gotoligcol(start_lig + 50, 0);
+        printf("Votre choix : ");
+        scanf("%d", &choix);
+
+        switch (choix) {//choix de l'action
+            case 1:// Cas pour déplacer le jeton.
+                printf("Deplacer son jeton\n");
+                break;
+            case 2:// Cas pour poser une barrière.
+                printf("Poser une barriere\n");
+                break;
+            case 3:// Cas pour passer son tour.
+                printf("Passer son tour\n");
+                break;
+            case 4:// Cas pour annuler le dernier mouvement.
+                printf("Annuler le dernier mouvement\n");
+                break;
+            case 5:// Cas pour quitter et sauvegarder.
+                printf("Quitter et sauvegarder.\n");
+                break;
+            case 6:// Cas pour quitter sans sauvegarder.
+                printf("Quitter sans sauvegarder\n");
+                break;
+            case 7:// Cas pour afficher l'aide du jeu.
+                printf("Aide du jeu\n");
+                break;
+            default:
+                printf("Choix invalide !\n");// choix invalides.
+        }
+    } while (choix != 5 && choix != 6);// La boucle continue tant que le joueur ne choisit pas de quitter (choix 5 ou 6).
+
+
+    return 0;// Fin de la fonction.
+
+}
