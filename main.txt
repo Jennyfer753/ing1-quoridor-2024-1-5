@@ -38,50 +38,52 @@ int main() {
     gotoligcol(5,10);
 
 
-    // afficher le message avec le texte en rouge fluo (12) et le fond en jaune (14)
+    //On affiche le menu avec les différents choix qui peuvent etre choisit. On affiche ces choix là avec des couleurs 
     Color(7, 15);
     printf("Menu Principal\n\n");
 
-    // afficher le message avec le texte en rouge fluo (12) et le fond en jaune (14)
+    
     Color(7, 15);
-    printf("1. choix joueurs\n\n");
+    printf("1. commencer la partie (écrire 1)\n\n");
 
-    // afficher le message avec le texte en rouge fluo (12) et le fond en jaune (14)
+    
     Color(7, 15);
-    printf("2. afficher aide\n\n");
+    printf("2. afficher aide (écrire 2)\n\n");
 
-    // afficher le message avec le texte en rouge fluo (12) et le fond en jaune (14)
+    
     Color(7, 15);
-    printf("3. afficher score\n\n");
+    printf("3. afficher score (écrire 3)\n\n");
 
-    // afficher le message avec le texte en rouge fluo (12) et le fond en jaune (14)
+    
     Color(7, 15);
-    printf("4. quitter jeu\n\n");
+    printf("4. quitter jeu (écrire 4)\n\n");
 
-    // afficher le message avec le texte en rouge fluo (12) et le fond en jaune (14)
+    
     Color(7, 15);
-    printf("5. reprendre partie\n\n");
+    printf("5. reprendre partie (écrire 5)\n\n");
 
 
-    printf("Selectionner une option:\n ",option);
+    printf("Selectionner une option:\n ",);
     scanf("%d",&option);
-    switch(option)
+    while (option =! 1 || option != 2 || option != 3 || option != 4 || option != 5 ){
+        printf("Le choix n_est pas valide. Veuillez selectionner une option valide.\n");
+        scanf("%d",&option);
+    }
+    switch(option) // on creer un switch qui va faire une certaine chose par rapport à ce que l'utilisateur choisi
     {
         case 1:
-            ChoixJoueurs();
+            CommencerPartie(); // s'il choisit le 1 alors on lance le programme du commencement du jeu
         case 2:
-            AfficherAide();
+            AfficherAide(); // s'il choisit le 2 alors on affiche l'aide où se trouve les règles
         case 3:
-            AfficherScores();
+            AfficherScores(); // s'il choisit le 3 alors on affiche les scores de parties précedentes
         case 4:
-            QuitterJeu();
+            QuitterJeu(); // s'il choisit le 4 alors on quitte completement le jeu et donc le rpogramme s'arrête
+            return 1
             break;
         case 5:
-            ReprendrePartie();
+            ReprendrePartie(); // s'il choisit le 5 alors on reprends la partie précédente
             break;
-        default():
-            printf("Le choix n_est pas valide. Veuillez selectionner une option valide.\n");
-
     }
     return 0;
 }
