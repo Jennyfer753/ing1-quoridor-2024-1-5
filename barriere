@@ -1,0 +1,117 @@
+void gotoxy(int x, int y) {
+    COORD coord;
+    coord.X = x;
+    coord.Y = y;
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+}
+
+// Initialisation du plateau
+void initialisationPlateau(char plateau[17][17], int taille) {
+    for (int i = 0; i < taille; i++) {
+        for (int j = 0; j < taille; j++) {
+            if (i % 2 == 0 && j % 2 == 0) {
+                plateau[i][j] = ' '; 
+            } else if (i % 2 == 0) {
+                plateau[i][j] = '|'; 
+            } else if (j % 2 == 0) {
+                plateau[i][j] = '-'; 
+            } else {
+                plateau[i][j] = ' '; 
+            }
+        }
+    }
+}
+
+
+void affichagePlateau(char plateau[17][17], int taille) {
+    gotoxy(30, 15); 
+    printf("   ");
+    for (int j = 0; j < taille; j++) {
+        if (j % 2 == 0) printf("%d ", (j / 2) + 1); 
+        else printf("  ");
+    }
+    printf("\n");
+
+    for (int i = 0; i < taille; i++) {
+        if (i % 2 == 0) printf(" %c ", 'A' + i / 2); 
+        else printf("   ");
+
+        for (int j = 0; j < taille; j++) {
+            printf("%c ", plateau[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+e
+int reglesPlacementBarriere(char plateau[17][17], int x1, int y1, char orientation) {
+    if (orientation == 'H') { 
+        if (y1 + 2 >= 17 || plateau[x1][y1] != '-' || plateau[x1][y1 + 2] != '-') {
+            return 0; 
+        }
+    } else if (orientation == 'V') { 
+        if (x1 + 2 >= 17 || plateau[x1][y1] != '|' || plateau[x1 + 2][y1] != '|') {
+            return 0; 
+        }
+    }
+    return 1;
+}
+
+
+void placerBarriere(char plateau[17][17], int x1, int y1, char orientation) {
+    if (orientation == 'H') {
+        plateau[x1][y1] = '#';
+        plateau[x1][y1 + 2] = '#';
+    } else if (orientation == 'V') {
+        plateau[x1][y1] = '#';
+        plateau[x1 + 2][y1] = '#';
+    }
+}
+
+
+void tour(char plateau[17][17], char *nomJoueur, int *barrieresRestantes) {
+    printf("%s, il vous reste %d barrières.\n", nomJoueur, *barrieresRestantes);
+
+    if (*barrieresRestantes <= 0) {
+        printf("Vous n'avez plus de barrières. Passez votre tour ou déplacez un jeton.\n");
+        return;
+    }
+
+    char ligne;
+    int colonne;
+    char orientation;
+
+    printf("Entrez les coordonnées (ex: A1) : ");
+    scanf(" %c%d", &ligne, &colonne);
+    printf("Orientation (H pour horizontal, V pour vertical) : ");
+    scanf(" %c", &orientation);
+
+    int x1 = (ligne - 'A') * 2;
+    int y1 = (colonne - 1) * 2;
+
+    if (reglesPlacementBarriere(plateau, x1, y1, orientation)) {
+        placerBarriere(plateau, x1, y1, orientation);
+        (*barrieresRestantes)--;
+        printf("Barrière placée avec succès !\n");
+    } else {
+        printf("Placement invalide. Réessayez au prochain tour.\n");
+    }
+}
+
+
+int main() {
+    char plateau[17][17];
+    int taille = 17;
+    int barrieresJ1 = 10, barrieresJ2 = 10;
+
+    initialisationPlateau(plateau, taille);
+
+    while (1) {
+        affichagePlateau(plateau, taille);
+        tour(plateau, "Joueur 1", &barrieresJ1);
+        affichagePlateau(plateau, taille);
+        tour(plateau, "Joueur 2", &barrieresJ2);
+    }
+
+    return 0;
+}
