@@ -1,29 +1,29 @@
+#include "joueurs.h"// Inclusion du fichier header "joueurs.h"
+#include "Jeu.h"
+int ChoixJoueurs(int nbrjoueur, char joueur1[], char joueur2[], char joueur3[], char joueur4[]) {
 
-
-int ChoixJoueurs()
-{
-    int nbrjoueur;
-    char joueur1[50],joueur2[50],joueur3[50],joueur4[50];
-    printf("Combien de joueurs pour cette partie?\n",nbrjoueur);
-    scanf("%d",&nbrjoueur);
-
-    if (nbrjoueur==2) {
+    if (nbrjoueur == 2) {// Apres avoir verifié que cest bien soit 2 soit 4, on fait si le nombre de jouer est 2
         printf("Entrer le nom du Joueur 1: ");
-        scanf("%s",&joueur1);
+        scanf("%s", joueur1); // Stocke le nom dans `joueur1` (sans `&` car c'est déjà un pointeur)
         printf("Entrer le nom du Joueur 2: ");
-        scanf("%s",&joueur2);
-        printf("Les noms des deux joueurs sont: %s %s ", joueur1, joueur2);
+        scanf("%s", joueur2); // Stocke le nom dans `joueur2`
+        printf("Les noms des deux joueurs sont: %s et %s\n", joueur1, joueur2);
     }
-    if (nbrjoueur==4) {
+
+    // Puis on fait le code quand il y a 4 joueurs
+    if (nbrjoueur == 4) {
         printf("Entrer le nom du Joueur 1: ");
-        scanf("%s",&joueur1);
+        scanf("%s", joueur1);
         printf("Entrer le nom du Joueur 2: ");
-        scanf("%s",&joueur2);
+        scanf("%s", joueur2);
         printf("Entrer le nom du Joueur 3: ");
-        scanf("%s",&joueur3);
+        scanf("%s", joueur3);
         printf("Entrer le nom du Joueur 4: ");
-        scanf("%s",&joueur4);
-        printf("Les noms des quatres joueurs sont:%s %s %s %s " ,joueur1,joueur2,joueur3,joueur4);
+        scanf("%s", joueur4);
+        printf("Les noms des quatre joueurs sont: %s, %s, %s et %s\n", joueur1, joueur2, joueur3, joueur4);
+    }
+
+    return 0; // Retourne 0 si tout s'est bien passé
 }
-    return 0;
-}
+
+
