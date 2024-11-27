@@ -1,21 +1,44 @@
 #include "Jeu.h"// Inclusion du fichier header "Jeu.h"
+#include "joueurs.h"
+void jeu() {
+    // Définition de la fonction `jeu` qui gère une nouvelle partie.
 
-void jeu() {  // Définition de la fonction `jeu` qui gère une nouvelle partie
-  
+    int nbrjoueur; // Variable pour stocker le nombre de joueurs.
+    char joueur1[50], joueur2[50], joueur3[50], joueur4[50]; // Variables pour stocker les noms des joueurs.
 
-    int nbrjoueur;//variable pour stocker le nombre de joueurs.
-    char joueur1[50], joueur2[50], joueur3[50], joueur4[50];// variables pour stocker les noms de jusqu'à quatre joueurs, 
-    printf("Combien de joueurs pour cette partie?\n");// saisir le nombre de joueurs.
-    scanf("%d", &nbrjoueur);    // Lit la valeur entrée par l'utilisateur et la stocke dans la variable `nbrjoueur`.
-    ChoixJoueurs(nbrjoueur, joueur1, joueur2, joueur3, joueur4); // Appelle la fonction `ChoixJoueurs` pour initialiser les noms des joueurs en fonction de leur nombre  
-    if (nbrjoueur == 2) { // Vérifie si la partie se joue à deux joueurs.
-        
-        while (JeuGagné != 1) {// Une boucle qui continue tant qu'aucun joueur n'a gagné. 
-            
-        }
+    printf("Combien de joueurs pour cette partie ? (2 ou 4)\n"); // Demande le nombre de joueurs.
+    scanf("%d", &nbrjoueur); // Lit la valeur entrée par l'utilisateur.
+
+    // Vérifie que le nombre de joueurs est valide (2 ou 4).
+    while (nbrjoueur != 4 && nbrjoueur != 2) {
+        printf("Nombre de joueurs invalide. Veuillez relancer la partie avec 2 ou 4 joueurs.\n");
+        scanf("%d", &nbrjoueur);
     }
 
-return 0;
+    // Appelle la fonction `ChoixJoueurs` pour initialiser les noms des joueurs en fonction de leur nombre.
+    ChoixJoueurs(nbrjoueur, joueur1, joueur2, joueur3, joueur4);
 
+    // Initialisation de variables pour gérer le jeu.
+    int JeuGagné = 0; // Indicateur pour savoir si un joueur a gagné.
+
+    // Début de la partie.
+    if (nbrjoueur == 2) {
+        printf("Partie a 2 joueurs entre %s et %s. Bonne chance !\n", joueur1, joueur2);
+        while (JeuGagné != 1) {
+            // Implémenter ici la logique de jeu pour 2 joueurs.
+            // Par exemple :
+            // - Afficher l'état du jeu.
+            // - Gérer les tours des joueurs.
+            // - Vérifier si un joueur a gagné après chaque tour.
+            break; // Pour éviter une boucle infinie (à enlever une fois la logique ajoutée).
+        }
+    } else if (nbrjoueur == 4) {
+        printf("Partie à 4 joueurs entre %s, %s, %s, et %s. Bonne chance !\n", joueur1, joueur2, joueur3, joueur4);
+        while (JeuGagné != 1) {
+            // Implémenter ici la logique de jeu pour 4 joueurs.
+            break; // Pour éviter une boucle infinie (à enlever une fois la logique ajoutée).
+        }
+    }
+    // Message à la fin de la partie.
+    printf("Partie terminee. Merci d avoir joue !\n");
 }
-
