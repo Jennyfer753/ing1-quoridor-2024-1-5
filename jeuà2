@@ -1,0 +1,71 @@
+#include "partieadeux.h"
+#include "plateauJeu.h"
+#include "joueur.h"
+#include "barrière.h"
+#include "jetons.h"
+#include "information.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+
+int joueurDebut() {//choisir aléatoirement le joueur qui commence
+    srand(time(NULL)); // Initialisation du générateur de nombres aléatoires
+    return (rand() % 2) + 1; // Retourne 1 ou 2
+}
+
+void placerPions(char plateau[17][17], int taille, char pion1, char pion2) {// Fonction pour placer les pions sur le plateau
+        plateau[0][taille / 2] = pion1;            // Pion 1 sur la première ligne
+        plateau[taille - 1][taille / 2] = pion2;  // Pion 2 sur la dernière ligne
+}
+
+void jouerTour(char* joueurActuel, char plateau[17][17], int taille) {
+    printf("C'est au tour de %s de jouer.\n", joueurActuel);
+    placementbarriere();
+    placementpions();
+}
+int debut = choisirJoueurDebut();// Choix aléatoire du joueur qui commence
+char* joueurActuel = (debut == 1) ? joueur1 : joueur2;
+printf("\n%s commence la partie !\n", joueurActuel);
+joueurActuel = (joueurActuel == joueur1) ? joueur2 : joueur1;// Alterner entre les joueurs
+int tour = 0;   // Boucle principale pour les tours de jeu
+while (1) {
+    jouerTour(joueurActuel, plateau, taille);
+
+}
+
+
+void commencementPartie(char* joueur1, char* joueur2, int taille) {
+    // Fonction principale pour démarrer la partie
+    char pion1, pion2;
+    char plateau[17][17];
+    int tableau();
+
+    printf("%s, entrez un caractère pour faire office de pion : ", joueur1);  // Choix des pions pour les joueurs
+    scanf("%c", &pion1);
+
+    do {
+        printf("%s, entrez un caractère pour faire office de pion : ", joueur2);
+        scanf("%c", &pion2);
+        if (pion1 == pion2) {
+            printf("Les deux pions doivent être différents.\n");
+        }
+    } while (pion1 == pion2);
+
+    joueurDebut();
+
+    int debut = joueurDebut();// Choix aléatoire du joueur qui commence
+    char* joueurActuel;
+    if (debut == 1) {
+        joueurActuel = joueur1;
+    } else {
+        joueurActuel = joueur2;
+    }
+    printf("%s, c'est à vous!\n", joueurActuel);
+    
+    while (1) {
+        jouerTour(joueurActuel, plateau, taille);
+        affichagePlateau(plateau, taille);
+        placerPions(plateau, taille, pion1, pion2);
+    }
+}
