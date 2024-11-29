@@ -1,0 +1,19 @@
+#include <stdio.h>
+
+int lireScore() {
+    FILE *fichier = fopen("score.txt","r");
+    if(fichier == NULL) {
+        printf("Erreur d'ouverture du fichier\n");
+        return -1;
+    }
+    int score;
+    while(fscanf(fichier,"%f",&score) == 1) {
+        printf("%f\n",score);
+        fclose(fichier);
+    }
+}
+
+int main(){
+    lireScore();
+
+}
